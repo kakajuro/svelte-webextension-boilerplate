@@ -2,11 +2,10 @@ import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
 
-// check if process.env is BUILD ALL
-// change build { outdir }, and build each plugin 
-// then script to zip all the files
+import path from "path";
 
 const target = process.env.TARGET || "chrome";
+const customOutputDir = process.env.OUTPUT;
 
 function generateManifest() {
   const manifest = readJsonFile("src/manifest.json");
@@ -30,5 +29,7 @@ export default defineConfig({
       disableAutoLaunch: target === "chrome" ? false : true
     }),
   ],
-  
+  build: {
+    outDir: customOutputDir ? path.join(customOutputDir, `${target.toLowerCase()}_dist`) : "dist"
+  }
 });
