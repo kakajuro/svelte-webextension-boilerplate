@@ -6,6 +6,8 @@ import webExtension, { readJsonFile } from "vite-plugin-web-extension";
 // change build { outdir }, and build each plugin 
 // then script to zip all the files
 
+const target = process.env.TARGET || "chrome";
+
 function generateManifest() {
   const manifest = readJsonFile("src/manifest.json");
   const pkg = readJsonFile("package.json");
@@ -22,8 +24,11 @@ export default defineConfig({
   plugins: [
     svelte(),
     webExtension({
+      browser: target,
       manifest: generateManifest,
       watchFilePaths: ["package.json", "manifest.json"],
+      disableAutoLaunch: target === "chrome" ? false : true
     }),
   ],
+  
 });
