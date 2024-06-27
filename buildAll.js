@@ -1,13 +1,10 @@
 import fs from "fs";
-import fsPromises from "fs/promises"
 import util from "util";
-import { rimraf, rimrafSync } from "rimraf"
+import { rimrafSync } from "rimraf"
 import path from "path";
 import { fileURLToPath } from "url";
 import { execSync } from "child_process";
 import { zip } from "zip-a-folder";
-
-// FIX NOT ZIPPING
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,7 +60,7 @@ for (let platform of platforms) {
 
     let inPath = path.join(__dirname, `/builds/${platform}_dist`);
     let outPath = path.join(__dirname, `/builds/${platform}_dist.zip`);
-
+    
     zip(inPath, outPath)
     .then(() => console.log(`Sucessfully zipped ${platform.toUpperCase()}`))
     .then(() => {
