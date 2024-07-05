@@ -24,7 +24,7 @@ export default defineConfig({
     svelte(),
     webExtension({
       browser: target,
-      manifest: generateManifest,
+      manifest: `manifests/${target.toLowerCase()}.manifest.json`,
       watchFilePaths: ["package.json", "manifest.json"],
       disableAutoLaunch: target === "chrome" ? false : true
     }),

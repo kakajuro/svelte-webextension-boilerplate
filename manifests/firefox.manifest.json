@@ -1,0 +1,29 @@
+{
+  "name": "svelteWebextensionTemplate",
+  "version": "1.0.0",
+  "description": "A cross platform web extension template using svelte",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon/16.png",
+    "32": "icon/32.png",
+    "48": "icon/48.png",
+    "96": "icon/96.png",
+    "128": "icon/128.png"
+  },
+  "browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "{{edge}}.browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "scripts": ["src/background.ts"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/content.ts"]
+    }
+  ]
+  
+}

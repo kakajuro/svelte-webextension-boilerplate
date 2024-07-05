@@ -2687,7 +2687,7 @@ zip-a-folder@^3.1.7:
     glob "^10.4.1"
     is-glob "^4.0.3"
 
-zip-dir@2.0.0, zip-dir@^2.0.0:
+zip-dir@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/zip-dir/-/zip-dir-2.0.0.tgz#c5df6e15c8f9efeb4e320377028c9f5c8277c932"
   integrity sha512-uhlsJZWz26FLYXOD6WVuq+fIcZ3aBPGo/cFdiLlv3KNwpa52IF3ISV8fLhQLiqVu5No3VhlqlgthN6gehil1Dg==
