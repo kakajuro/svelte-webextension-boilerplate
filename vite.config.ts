@@ -7,17 +7,6 @@ import path from "path";
 const target = process.env.TARGET || "chrome";
 const customOutputDir = process.env.OUTPUT;
 
-function generateManifest() {
-  const manifest = readJsonFile("src/manifest.json");
-  const pkg = readJsonFile("package.json");
-  return {
-    name: pkg.name,
-    description: pkg.description,
-    version: pkg.version,
-    ...manifest,
-  };
-}
-
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -26,7 +15,7 @@ export default defineConfig({
       browser: target,
       manifest: `manifests/${target.toLowerCase()}.manifest.json`,
       watchFilePaths: ["package.json", "manifest.json"],
-      disableAutoLaunch: target === "chrome" ? false : true
+      //disableAutoLaunch: target === "chrome" ? false : true
     }),
   ],
   build: {
