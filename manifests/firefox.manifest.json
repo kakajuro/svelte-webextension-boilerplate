@@ -1,7 +1,6 @@
 {
   "manifest_version": 2,
   "name": "svelteWebextensionTemplate",
-  "short_name": "svelteWebextensionTemplate",
   "version": "1.0.0",
   "description": "A cross platform web extension template using svelte",
   "icons": {
@@ -23,5 +22,5 @@
   },
   "background": {
     "scripts": ["src/background.ts"]
-  },
+  }
 }
