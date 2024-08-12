@@ -11,7 +11,7 @@
     "chrome:build": "cross-env TARGET=chrome vite build",
     "firefox:build": "cross-env TARGET=firefox vite build",
     "edge:build": "cross-env TARGET=edge vite build",
-    "build:all": "node buildAll $npm_config_zip $npm_config_keepunzipped"
+    "build:all": "node buildAll"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.1",
@@ -25,7 +25,6 @@
     "typescript": "^5.5.3",
     "vite": "^5.3.3",
     "vite-plugin-web-extension": "^4.0.0",
-    "webextension-polyfill": "^0.12.0",
-    "zip-a-folder": "^3.1.7"
+    "webextension-polyfill": "^0.12.0"
   }
 }
