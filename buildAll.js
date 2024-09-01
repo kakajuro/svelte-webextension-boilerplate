@@ -1,6 +1,7 @@
 import fs from "fs";
 import util from "util";
-import { rimrafSync } from "rimraf"
+import zipdir from "zip-dir"
+import { rimraf, rimrafSync } from "rimraf"
 import path from "path";
 import { fileURLToPath } from "url";
 import { execSync } from "child_process";
@@ -38,5 +39,29 @@ for (let platform of platforms) {
   console.log(`Built for ${platform.toUpperCase()} sucessfully!`);
 
 }
+
+// Zip
+for (let platform of platforms) {
+
+  console.log(`Attempting to zip: ${platform.toUpperCase()}...`);
+
+  let inPath = path.join(__dirname, `/builds/${platform}_dist`);
+  let outPath = path.join(__dirname, `/builds/${platform}_dist.zip`);
+
+  await zipdir(inPath, 
+    { each: path => console.log(path.replace(/^.*[\\/]/, ''), `added to ${platform.toUpperCase()} zip`), saveTo: outPath },  
+    (err, buffer) => {
+      if (err) {
+        console.warn("An error occurred while zipping: " + err);
+      } else {
+        console.log(`Zipped: ${platform.toUpperCase()}`);
+      }
+  })
+
+  // Remove unzipped builds
+  rimraf(inPath);
+
+}
+
 
 console.log("Building complete");
