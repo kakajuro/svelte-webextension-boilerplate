@@ -1,5 +1,4 @@
 import fs from "fs";
-import util from "util";
 import zipdir from "zip-dir"
 import { rimraf, rimrafSync } from "rimraf"
 import path from "path";
@@ -8,8 +7,6 @@ import { execSync } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const execPromise = util.promisify(execSync);
 
 let platforms = ["chrome", "firefox", "edge"];
 let outputDir = path.join(__dirname, "builds");
@@ -32,11 +29,12 @@ for (let platform of platforms) {
 
   console.log(`Building for ${platform.toUpperCase()}...`);
 
-  execPromise(`cross-env TARGET=${platform} OUTPUT=${outputDir} vite build`)
-  .then(() => console.log(`Built for ${platform.toUpperCase()} sucessfully!`))
-  .catch(error => console.error(`Error building for ${platform.toUpperCase()}: ${error}`))
-
-  console.log(`Built for ${platform.toUpperCase()} sucessfully!`);
+  try {
+    await execSync(`cross-env TARGET=${platform} OUTPUT=${outputDir} vite build`);
+    console.log(`Built for ${platform.toUpperCase()} sucessfully!`)
+  } catch (error) {
+    console.error(`Error building for ${platform.toUpperCase()}: ${error}`)
+  }
 
 }
 
